@@ -4,9 +4,20 @@
              x:Class="TruthOrDrink.RegisterPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="HIER KOMT REGISTRATIE"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="Create an account here:" FontSize="Title"/>
+
+            <Entry x:Name="NameEntry" Placeholder="Enter your real name here"/>
+            <Entry x:Name="UserNameEntry" Placeholder="Enter your desired username here"/>
+            <Entry x:Name="PasswordEntry" Placeholder="Enter your desired password here"/>
+            <Entry x:Name="EmailEntry" Placeholder="Enter your email here" Keyboard="Email"/>
+
+            <DatePicker x:Name="BirthdayDatePicker" DateSelected="BirthdayDatePicker_DateSelected"/>
+
+            <Label Text="I confirm that i want to create an account"/>
+            <CheckBox x:Name="ConfirmationCheckBox" IsChecked="False"/>
+
+            <Button x:Name="RegisterButton" Text="Confirm registration" Clicked="RegisterButton_Clicked"/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
