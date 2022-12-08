@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TruthOrDrink.AddQuestionPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Enter your custom question:"/>
+            <Entry x:Name="QuestionEntry" Placeholder="Questions have a max length of 200 char."/>
+            <Button x:Name="SaveQuestionButton" Text="Save question" Clicked="SaveQuestionButton_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
