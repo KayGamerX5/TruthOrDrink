@@ -4,9 +4,11 @@
              x:Class="TruthOrDrink.SettingsPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="HIER KOMEN INSTELLINGEN"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label x:Name="UserNameLabel" Text="Username placeholder"/>
+            <Label x:Name="PasswordLabel" Text="Password placeholder"/>
+            <Label x:Name="NameLabel" Text="Name Placeholder"/>
+            <Label x:Name="EmailLabel" Text="Email placeholder"/>
+            <Label x:Name="BirthdayLabel" Text="Birthday Placeholder"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
