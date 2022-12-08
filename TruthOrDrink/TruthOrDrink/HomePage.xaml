@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TruthOrDrink.HomePage"
+            xmlns:local="clr-namespace:TruthOrDrink"
+             NavigationPage.HasBackButton="False">
+
+    <TabbedPage.ToolbarItems>
+        <ToolbarItem
+            x:Name="SettingsButton"
+            Text="Settings"
+            Clicked="SettingsButton_Clicked"/>
+    </TabbedPage.ToolbarItems>
+    
+    
+    <local:StartGamePage Title="Play the game"/>
+    <local:QuestionPage Title="Questions"/>
+    <local:ApiPage Title="API"/>
+
+
+</TabbedPage>
