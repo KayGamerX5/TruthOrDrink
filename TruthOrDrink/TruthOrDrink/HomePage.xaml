@@ -9,7 +9,9 @@
         <ToolbarItem
             x:Name="SettingsButton"
             Text="Settings"
-            Clicked="SettingsButton_Clicked"/>
+            Clicked="SettingsButton_Clicked"
+            IconImageSource="SettingsIcon.png"
+            Order="Primary"/>
     </TabbedPage.ToolbarItems>
     
     
