@@ -17,9 +17,17 @@ namespace TruthOrDrink
             InitializeComponent();
         }
 
+        public HomePage(string connectedUser)
+        {
+            ConnectedUser = connectedUser;
+            InitializeComponent();
+        }
+
+        public string ConnectedUser { get; }
+
         private void SettingsButton_Clicked(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new SettingsPage());
+            Navigation.PushAsync(new SettingsPage(ConnectedUser));
         }
     }
 }

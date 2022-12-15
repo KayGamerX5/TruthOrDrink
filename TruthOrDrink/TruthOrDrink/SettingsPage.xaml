@@ -3,12 +3,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="TruthOrDrink.SettingsPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label x:Name="UserNameLabel" Text="Username placeholder"/>
-            <Label x:Name="PasswordLabel" Text="Password placeholder"/>
-            <Label x:Name="NameLabel" Text="Name Placeholder"/>
-            <Label x:Name="EmailLabel" Text="Email placeholder"/>
-            <Label x:Name="BirthdayLabel" Text="Birthday Placeholder"/>
-        </StackLayout>
+        <ScrollView>
+            <StackLayout>
+                <Label x:Name="UserNameLabel" Text="Username placeholder"/>
+                <Label x:Name="PasswordLabel" Text="Password placeholder"/>
+                <Label x:Name="NameLabel" Text="Name Placeholder"/>
+                <Label x:Name="EmailLabel" Text="Email placeholder"/>
+                <Label x:Name="BirthdayLabel" Text="Birthday Placeholder"/>
+
+                <Button x:Name="EditUserButton" Text="Change user information" Clicked="EditUserButton_Clicked" IsVisible="True"/>
+
+                <Entry x:Name="EditUserNameEntry" Placeholder="Enter your Username here" IsVisible="False"/>
+                <Entry x:Name="EditPasswordEntry" Placeholder="Enter your Password here" IsVisible="False" IsPassword="True"/>
+                <Entry x:Name="EditRealNameEntry" Placeholder="Enter your real name here" IsVisible="False"/>
+                <Entry x:Name="EditEmailEntry" Placeholder="Enter your email here" IsVisible="False" Keyboard="Email"/>
+                <Label x:Name="DatePickerLabel" Text="Enter your date of birth here" IsVisible="False"/>
+                <DatePicker x:Name="EditBirthdayDatePicker" DateSelected="EditBirthdayDatePicker_DateSelected" IsVisible="False"/>
+
+                <Label x:Name="CheckboxLabel" Text="I confirm i want to change my account details" IsVisible="False"/>
+                <CheckBox x:Name="EditUserConfirmCheckbox" IsChecked="False" IsVisible="False"/>
+
+                <Button x:Name="EditUserSaveButton" Text="Save changes" Clicked="EditUserSaveButton_Clicked" IsVisible="False"/>
+
+
+
+
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

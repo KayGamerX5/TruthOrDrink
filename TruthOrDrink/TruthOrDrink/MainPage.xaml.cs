@@ -13,6 +13,8 @@ namespace TruthOrDrink
 {
     public partial class MainPage : ContentPage
     {
+
+        public string ConnectedUser = string.Empty;
         public MainPage()
         {
             InitializeComponent();
@@ -25,6 +27,8 @@ namespace TruthOrDrink
 
             var userName = UserName.Text;
             User user = new User();
+
+            ConnectedUser = UserName.Text;
 
             var password = Password.Text;
 
@@ -43,15 +47,24 @@ namespace TruthOrDrink
             }
             else
             {
-                if (password == user.Password)
+                if (user != null)
                 {
-                    Navigation.PushAsync(new HomePage());
+                    if (password == user.Password)
+                    {
+                        Navigation.PushAsync(new HomePage(ConnectedUser));
+                    }
+                    else
+                    {
+                        UserNameLabel.Text = "Password and username dont match an existing account!";
+                        UserNameLabel.TextColor = Color.Red;
+                        UserNameLabel.FontSize = 24;
+                    }
                 }
                 else
                 {
-                    UserNameLabel.Text = "Password and username dont match!";
+                    UserNameLabel.Text = "This account does not match any existing accounts";
                     UserNameLabel.TextColor = Color.Red;
-                    UserNameLabel.FontSize = 24;
+                    UserNameLabel.FontSize=24;
                 }
             }
         }
