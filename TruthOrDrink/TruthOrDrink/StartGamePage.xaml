@@ -4,11 +4,18 @@
              x:Class="TruthOrDrink.StartGamePage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="THE START OF THE GAME WILL BE HOSTED HERE"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="Welcome to truth or drink!" FontSize="Header"/>
+            <Label Text="Enter the desired name for each player"/>
+            <Entry x:Name="PlayerOneNameEntry" Placeholder="Player 1 name"/>
+            <Entry x:Name="PlayerTwoNameEntry" Placeholder="Player 2 name"/>
+            <Entry x:Name="PlayerThreeNameEntry" Placeholder="Player 3 name" IsVisible="False"/>
+            <Entry x:Name="PlayerFourNameEntry" Placeholder="Player 4 name" IsVisible="False"/>
 
-            <Button x:Name="StartGameButton" Text="Start the game" VerticalOptions="End" Clicked="StartGameButton_Clicked"/>
+            <Button x:Name="AddPlayer3Button" Text="Add another player" Clicked="AddPlayer3Button_Clicked"/>
+            <Button x:Name="AddPlayer4Button" Text="Add another player" Clicked="AddPlayer4Button_Clicked" IsVisible="False"/>
+
+            <Button x:Name="StartGameButton" Text="Start the game" Clicked="StartGameButton_Clicked"/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
