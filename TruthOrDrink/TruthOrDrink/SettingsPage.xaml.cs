@@ -86,12 +86,12 @@ namespace TruthOrDrink
                     updatedRows = connection.Update(user);
                     if (updatedRows > 0)
                     {
-                        _ = DisplayAlert("Succes!", "Succesfully edited account details", "Exit");
+                        DisplayAlert("Succes!", "Succesfully edited account details", "Exit");
                         Navigation.PushAsync(new MainPage());
                     }
                     else
                     {
-                        _ = DisplayAlert("Oops!", "Something went wrong, try again!", "Exit");
+                        DisplayAlert("Oops!", "Something went wrong, try again!", "Exit");
                     }
                 }
             }
@@ -99,7 +99,7 @@ namespace TruthOrDrink
 
             else
             {
-                _ = DisplayAlert("Oops!", "You have to check the checkbox to confirm the edit", "Exit");
+                DisplayAlert("Oops!", "You have to check the checkbox to confirm the edit", "Exit");
             }
 
         }
