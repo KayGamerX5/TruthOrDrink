@@ -5,12 +5,18 @@
              NavigationPage.HasBackButton="False">
     <ContentPage.Content>
         <StackLayout>
-            <Label x:Name="PlayerOneNameLabel"/>
-            <Label x:Name="PlayerTwoNameLabel"/>
-            <Label x:Name="PlayerThreeNameLabel" IsVisible="False"/>
-            <Label x:Name="PlayerFourNameLabel" IsVisible="False"/>
+
+            <Label x:Name="CurrentPlayerLabel" />
+            <Label x:Name="QuestionLabel" FontSize="Header"/>
+
+            <Button x:Name="TruthButton" Text="Truth" Clicked="TruthButton_Clicked"/>
+            <Button x:Name="DrinkButton" Text="Drink" Clicked="DrinkButton_Clicked"/>
 
             <Button x:Name="ExitButton" Clicked="ExitButton_Clicked" Text="Back"/>
+            
+            
+            
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

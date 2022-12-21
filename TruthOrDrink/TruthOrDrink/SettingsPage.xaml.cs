@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TruthOrDrink.DataAccess;
 using TruthOrDrink.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -25,13 +26,9 @@ namespace TruthOrDrink
 
             ConnectedUser = connectedUser;
 
-            User user = new User();
-
-            using (SQLiteConnection connection = new SQLiteConnection(App.DatabaseLocation))
-            {
-                connection.CreateTable<User>();
-                user = connection.Table<User>().Where(x => x.UserName == ConnectedUser).FirstOrDefault();
-            }
+            DAL dal = new DAL();
+            var user = dal.GetUser(ConnectedUser);
+           
 
             UserNameLabel.Text = "Username: " + user.UserName;
             PasswordLabel.Text = "Password: " + user.Password;
@@ -102,6 +99,11 @@ namespace TruthOrDrink
                 DisplayAlert("Oops!", "You have to check the checkbox to confirm the edit", "Exit");
             }
 
+        }
+
+        private void LogoutButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new MainPage());
         }
     }
 }

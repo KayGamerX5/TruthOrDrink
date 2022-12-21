@@ -22,22 +22,16 @@ namespace TruthOrDrink
 
         private void LoginButton_Clicked(object sender, EventArgs e)
         {
+
+            DAL dal = new DAL();
             bool IsUsernameEmpty = string.IsNullOrEmpty(UserName.Text);
             bool IsPasswordEmpty = string.IsNullOrEmpty(Password.Text);
 
             var userName = UserName.Text;
-            User user = new User();
-
+            var user = dal.GetUser(userName);
             ConnectedUser = UserName.Text;
 
             var password = Password.Text;
-
-            using(SQLiteConnection connection = new SQLiteConnection(App.DatabaseLocation))
-            {
-                connection.CreateTable<User>();
-                user = connection.Table<User>().Where(x => x.UserName == userName).FirstOrDefault();
-
-            }
 
             if (IsUsernameEmpty || IsPasswordEmpty)
             {
