@@ -24,6 +24,7 @@
                 <CheckBox x:Name="EditUserConfirmCheckbox" IsChecked="False" IsVisible="False"/>
 
                 <Button x:Name="EditUserSaveButton" Text="Save changes" Clicked="EditUserSaveButton_Clicked" IsVisible="False"/>
+                <Button x:Name="LogoutButton" Text="Log out" Clicked="LogoutButton_Clicked"/>
 
 
 

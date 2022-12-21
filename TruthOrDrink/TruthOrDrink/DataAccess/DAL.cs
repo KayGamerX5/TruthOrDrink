@@ -6,17 +6,27 @@ using TruthOrDrink.Model;
 
 namespace TruthOrDrink.DataAccess
 {
-    internal class DAL
+    public class DAL
     {
-        public string GetUser(string userName)
+        public User GetUser(string userName)
         {
 
-            User user = new User();
+            
             using (SQLiteConnection connection = new SQLiteConnection(App.DatabaseLocation))
             {
                 connection.CreateTable<User>();
-                user = connection.Table<User>().Where(x => x.UserName == userName).FirstOrDefault();
-                return user.UserName;
+                var user = connection.Table<User>().Where(x => x.UserName == userName).FirstOrDefault();
+                return user;
+            }
+        }
+
+        public User CreateUser(User user)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(App.DatabaseLocation))
+            {
+                connection.CreateTable<User>();
+                int insertedrows = connection.Insert(user);
+                return user;
             }
         }
     }

@@ -77,49 +77,48 @@ namespace TruthOrDrink
                         DisplayAlert("Oops!", "Something went wrong, try again", "Exit");
                     }
                 }
-            }
-            
-            if(PlayerThreeNameEntry.Text != null)
-            {
-                players++;
-                Player player3 = new Player();
-                player3.Name = PlayerThreeNameEntry.Text;
-                player3.Score = 0;
-                player3.TimesDrink = 0;
-
-                using (SQLiteConnection connection = new SQLiteConnection(App.DatabaseLocation))
+                if (PlayerThreeNameEntry.Text != null)
                 {
-                    connection.CreateTable<Player>();
-                    int insert1 = connection.Insert(player3);
+                    players++;
+                    Player player3 = new Player();
+                    player3.Name = PlayerThreeNameEntry.Text;
+                    player3.Score = 0;
+                    player3.TimesDrink = 0;
 
-                    if (insert1 < 1)
+                    using (SQLiteConnection connection = new SQLiteConnection(App.DatabaseLocation))
                     {
-                        DisplayAlert("Oops!", "Something went wrong, try again", "Exit");
+                        connection.CreateTable<Player>();
+                        int insert1 = connection.Insert(player3);
+
+                        if (insert1 < 1)
+                        {
+                            DisplayAlert("Oops!", "Something went wrong, try again", "Exit");
+                        }
                     }
                 }
-            }
 
-            if(PlayerFourNameEntry.Text != null)
-            {
-                players++;
-                Player player4 = new Player();
-                player4.Name = PlayerFourNameEntry.Text;
-                player4.Score = 0;
-                player4.TimesDrink = 0;
-
-                using (SQLiteConnection connection = new SQLiteConnection(App.DatabaseLocation))
+                if (PlayerFourNameEntry.Text != null)
                 {
-                    connection.CreateTable<Player>();
-                    int insert1 = connection.Insert(player4);
+                    players++;
+                    Player player4 = new Player();
+                    player4.Name = PlayerFourNameEntry.Text;
+                    player4.Score = 0;
+                    player4.TimesDrink = 0;
 
-                    if (insert1 < 1)
+                    using (SQLiteConnection connection = new SQLiteConnection(App.DatabaseLocation))
                     {
-                        DisplayAlert("Oops!", "Something went wrong, try again", "Exit");
+                        connection.CreateTable<Player>();
+                        int insert1 = connection.Insert(player4);
+
+                        if (insert1 < 1)
+                        {
+                            DisplayAlert("Oops!", "Something went wrong, try again", "Exit");
+                        }
                     }
                 }
-            }
 
-            Navigation.PushAsync(new GamePage(players));
+                Navigation.PushAsync(new GamePage(players));
+            }
         }
     }
 }

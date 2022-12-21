@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TruthOrDrink.DataAccess;
 using TruthOrDrink.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,6 +14,7 @@ namespace TruthOrDrink
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegisterPage : ContentPage
     {
+        DAL dal = new DAL();
         DateTime birthday = new DateTime();
         public RegisterPage()
         {
@@ -32,37 +34,25 @@ namespace TruthOrDrink
             var email = EmailEntry.Text;
             var Birthday = birthday;
             User user = new User();
-
+            
             user.UserName = userName;
             user.Password = password;
             user.Name = name;
             user.Email = email;
             user.Birthday = Birthday;
+            
+            dal.CreateUser(user);
 
             bool CheckboxIsChecked = ConfirmationCheckBox.IsChecked;
-
-            using (SQLiteConnection connection = new SQLiteConnection(App.DatabaseLocation))
+            if(CheckboxIsChecked == true)
             {
-                
-                if (CheckboxIsChecked == true)
-                {
-                    connection.CreateTable<User>();
-                    int insertedrows = connection.Insert(user);
-                    if (insertedrows > 0)
-                    {
-                        _ = DisplayAlert("Succes!", "Your account has been created", "Exit");
-                    }
-                    else
-                    {
-                        _ = DisplayAlert("Oops!", "Something went wrong, try again later", "Exit");
-                    }
-                }
-                else
-                {
-                    _ = DisplayAlert("Alert!", "You must tick the checkbox to continue", "Exit");
-                }
+                dal.CreateUser(user);
+                await DisplayAlert("Success", "Your account has been created", "Exit");
             }
-            
+            else
+            {
+                _ = DisplayAlert("Alert!", "You must tick the checkbox to continue", "Exit");
+            }
 
             await Navigation.PopAsync();
         }
