@@ -40,8 +40,6 @@ namespace TruthOrDrink
             user.Name = name;
             user.Email = email;
             user.Birthday = Birthday;
-            
-            dal.CreateUser(user);
 
             bool CheckboxIsChecked = ConfirmationCheckBox.IsChecked;
             if(CheckboxIsChecked == true)

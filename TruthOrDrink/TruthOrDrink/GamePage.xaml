@@ -11,8 +11,8 @@
 
             <Button x:Name="TruthButton" Text="Truth" Clicked="TruthButton_Clicked"/>
             <Button x:Name="DrinkButton" Text="Drink" Clicked="DrinkButton_Clicked"/>
-
-            <Button x:Name="ExitButton" Clicked="ExitButton_Clicked" Text="Back"/>
+            <Button x:Name="EndGameButton" Text="End the game" Clicked="EndGameButton_Clicked"/>
+            <Button x:Name="ExitButton" Clicked="ExitButton_Clicked" Text="Back to menu"/>
             
             
             

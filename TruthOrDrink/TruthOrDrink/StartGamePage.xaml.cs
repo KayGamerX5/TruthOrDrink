@@ -4,17 +4,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TruthOrDrink.DataAccess;
 using TruthOrDrink.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace TruthOrDrink
 {
-    
 
+   
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class StartGamePage : ContentPage
     {
+        DAL dal = new DAL();
         public int players = 2;
 
         public StartGamePage()
@@ -64,19 +66,9 @@ namespace TruthOrDrink
                 player2.Score = 0;
                 player2.TimesDrink = 0;
 
-                using(SQLiteConnection connection = new SQLiteConnection(App.DatabaseLocation))
-                {
-                    connection.CreateTable<Player>();
-                    int insert1 = connection.Insert(player1);
-                    int insert2 = connection.Insert(player2);
-
-                    int insertedrows = insert1 + insert2;
-
-                    if(insertedrows < 2)
-                    {
-                        DisplayAlert("Oops!", "Something went wrong, try again", "Exit");
-                    }
-                }
+                dal.CreatePlayer(player1);
+                dal.CreatePlayer(player2);
+             
                 if (PlayerThreeNameEntry.Text != null)
                 {
                     players++;
@@ -85,16 +77,7 @@ namespace TruthOrDrink
                     player3.Score = 0;
                     player3.TimesDrink = 0;
 
-                    using (SQLiteConnection connection = new SQLiteConnection(App.DatabaseLocation))
-                    {
-                        connection.CreateTable<Player>();
-                        int insert1 = connection.Insert(player3);
-
-                        if (insert1 < 1)
-                        {
-                            DisplayAlert("Oops!", "Something went wrong, try again", "Exit");
-                        }
-                    }
+                    dal.CreatePlayer(player3);
                 }
 
                 if (PlayerFourNameEntry.Text != null)
@@ -105,16 +88,7 @@ namespace TruthOrDrink
                     player4.Score = 0;
                     player4.TimesDrink = 0;
 
-                    using (SQLiteConnection connection = new SQLiteConnection(App.DatabaseLocation))
-                    {
-                        connection.CreateTable<Player>();
-                        int insert1 = connection.Insert(player4);
-
-                        if (insert1 < 1)
-                        {
-                            DisplayAlert("Oops!", "Something went wrong, try again", "Exit");
-                        }
-                    }
+                    dal.CreatePlayer(player4);
                 }
 
                 Navigation.PushAsync(new GamePage(players));

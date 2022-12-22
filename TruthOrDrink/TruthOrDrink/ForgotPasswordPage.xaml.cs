@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TruthOrDrink.DataAccess;
 using TruthOrDrink.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,6 +14,7 @@ namespace TruthOrDrink
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ForgotPasswordPage : ContentPage
     {
+        DAL dal = new DAL();
         public ForgotPasswordPage()
         {
             InitializeComponent();
@@ -22,13 +24,7 @@ namespace TruthOrDrink
         {
             var userName = ForgotPasswordUserNameEntry.Text;
 
-            User user = new User();
-
-            using (SQLiteConnection connection = new SQLiteConnection(App.DatabaseLocation))
-            {
-                connection.CreateTable<User>();
-                user = connection.Table<User>().Where(x => x.UserName == userName).FirstOrDefault();
-            }
+            var user = dal.GetUser(userName);
             if (user != null)
             {
                 _ = DisplayAlert("Success!", "An email has been sent to " + user.Email, "Exit");
