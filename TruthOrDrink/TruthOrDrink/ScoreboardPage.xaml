@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TruthOrDrink.ScoreboardPage"
+             NavigationPage.HasBackButton="False">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Label x:Name="PlayerOneNameLabel"/>
+            <Label x:Name="PlayerOneTruthsLabel"/>
+            <Label x:Name="PlayerOneDrinksLabel"/>
+
+            <Label x:Name="PlayerTwoNameLabel"/>
+            <Label x:Name="PlayerTwoTruthsLabel"/>
+            <Label x:Name="PlayerTwoDrinksLabel"/>
+
+            <Label x:Name="PlayerThreeNameLabel"/>
+            <Label x:Name="PlayerThreeTruthsLabel"/>
+            <Label x:Name="PlayerThreeDrinksLabel"/>
+            
+            <Label x:Name="PlayerFourNameLabel"/>
+            <Label x:Name="PlayerFourTruthsLabel"/>
+            <Label x:Name="PlayerFourDrinksLabel"/>
+
+            <Button x:Name="ExitButton" Text="Return to home" Clicked="ExitButton_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

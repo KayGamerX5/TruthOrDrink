@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TruthOrDrink.DataAccess;
 using TruthOrDrink.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,6 +14,7 @@ namespace TruthOrDrink
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class QuestionPage : ContentPage
     {
+        DAL dal = new DAL();
         public QuestionPage()
         {
             InitializeComponent();
@@ -20,12 +22,11 @@ namespace TruthOrDrink
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            using (SQLiteConnection sQLiteConnection = new SQLiteConnection(App.DatabaseLocation))
-            {
-                sQLiteConnection.CreateTable<Question>();
-                var questions = sQLiteConnection.Table<Question>().ToList();
-                QuestionListView.ItemsSource = questions;
-            }
+
+            var questions = dal.QuestionsToList();
+
+            QuestionListView.ItemsSource = questions;
+            
         }
 
         private void AddQuestionButton_Clicked(object sender, EventArgs e)

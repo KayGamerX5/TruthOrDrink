@@ -8,6 +8,17 @@
 
             <Entry x:Name="QuestionBodyEntry"/>
 
+            <Label x:Name="CategoryLabel"/>
+
+            <Picker x:Name="CategoryPicker" Title="Pick a category" SelectedIndexChanged="CategoryPicker_SelectedIndexChanged">
+                <Picker.Items>
+                    <x:String>On the rocks</x:String>
+                    <x:String>Happy hour</x:String>
+                    <x:String>Last call</x:String>
+                    <x:String>Extra dirty</x:String>
+                </Picker.Items>
+            </Picker>
+
             <Button x:Name="EditButton" Text="Edit Question" Clicked="EditButton_Clicked"/>
             <Button x:Name="DeleteButton" Text="Delete Question" Clicked="DeleteButton_Clicked"/>
         </StackLayout>
