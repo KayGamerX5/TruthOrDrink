@@ -4,9 +4,42 @@
              x:Class="TruthOrDrink.ApiPage">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="HIER KOMT API"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label Text="Click the button to pull up a random cocktail to play the game with"/>
+            <Button x:Name="RandomCocktailButton" Text="Generate random cocktail" Clicked="RandomCocktailButton_Clicked"/>
+            <ScrollView>
+                <StackLayout>
+                    <ListView x:Name="CocktailListView" HasUnevenRows="True">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid Padding="10">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.RowSpan="2"
+                                               Source="{Binding strDrinkThumb}"
+                                               Aspect="AspectFill"
+                                               HeightRequest="60"
+                                               WidthRequest="60"/>
+                                        <Label Grid.Column="1"
+                                               Text="{Binding strDrink}"
+                                               FontAttributes="Bold"/>
+                                        <Label Grid.Row="1"
+                                               Grid.Column="1"
+                                               Text="{Binding strCategory}"
+                                               VerticalOptions="End"/>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

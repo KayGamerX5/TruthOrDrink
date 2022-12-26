@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using TruthOrDrink.Model;
 
@@ -92,13 +93,14 @@ namespace TruthOrDrink.DataAccess
         {
             using (SQLiteConnection connection = new SQLiteConnection(App.DatabaseLocation))
             {
-                var player = connection.Table<Player>().ElementAt(currentPlayer);
-                player.Name = player.Name;
-                player.Score = player.Score + 1;
-                player.TimesDrink = player.TimesDrink;
-                connection.Update(player);
+                var players = connection.Table<Player>().Where(x => x.IsActive == true).ToList();
+                players[currentPlayer].Name = players[currentPlayer].Name;
+                players[currentPlayer].Score = players[currentPlayer].Score + 1;
+                players[currentPlayer].TimesDrink = players[currentPlayer].TimesDrink;
+                players[currentPlayer].IsActive = players[currentPlayer].IsActive;
+                connection.Update(players[currentPlayer]);
 
-                return player.Score;
+                return players[currentPlayer].Score;
             }
         }
 
@@ -106,13 +108,14 @@ namespace TruthOrDrink.DataAccess
         {
             using (SQLiteConnection connection = new SQLiteConnection(App.DatabaseLocation))
             {
-                var player = connection.Table<Player>().ElementAt(currentPlayer);
-                player.Name = player.Name;
-                player.Score = player.Score;
-                player.TimesDrink = player.TimesDrink + 1;
-                connection.Update(player);
+                var players = connection.Table<Player>().Where(x => x.IsActive == true).ToList();
+                players[currentPlayer].Name = players[currentPlayer].Name;
+                players[currentPlayer].Score = players[currentPlayer].Score;
+                players[currentPlayer].TimesDrink = players[currentPlayer].TimesDrink + 1;
+                players[currentPlayer].IsActive = players[currentPlayer].IsActive;
+                connection.Update(players[currentPlayer]);
 
-                return player.Score;
+                return players[currentPlayer].Score;
             }
         }
 
@@ -155,5 +158,32 @@ namespace TruthOrDrink.DataAccess
                 return deletedrows;
             }
         }
+
+        public List<Player> GetPlayers()
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(App.DatabaseLocation))
+            {
+                connection.CreateTable<Player>();
+                var players = connection.Table<Player>().Where(x => x.IsActive == true).ToList();
+                return players;
+            }
+        }
+
+        public int SetUserInactive(string Player)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(App.DatabaseLocation))
+            {
+                connection.CreateTable<Player>();
+                var player = connection.Table<Player>().Where(x => x.Name == Player).FirstOrDefault(); ;
+                player.Name = player.Name;
+                player.Score = player.Score;
+                player.TimesDrink = player.TimesDrink;
+                player.IsActive = false;
+                int updatedRows = connection.Update(player);
+
+                return updatedRows;
+            }
+        }
+
     }
 }

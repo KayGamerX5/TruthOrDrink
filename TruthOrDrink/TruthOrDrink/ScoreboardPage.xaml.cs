@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TruthOrDrink.DataAccess;
+using TruthOrDrink.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -13,45 +14,51 @@ namespace TruthOrDrink
     public partial class ScoreboardPage : ContentPage
     {
         DAL dal = new DAL();
+        List<Player> Players = new List<Player>();
         public ScoreboardPage()
         {
             InitializeComponent();
 
+            Players = dal.GetPlayers();
+
             int playerCount = dal.CountPlayers();
 
-            var player1 = dal.GetPlayer(0);
-            var player2 = dal.GetPlayer(1);
+            PlayerOneNameLabel.Text = Players[0].Name;
+            PlayerOneTruthsLabel.Text = "Truths told: " + Players[0].Score.ToString();
+            PlayerOneDrinksLabel.Text = "Drinks taken: " + Players[0].TimesDrink.ToString();
 
-            PlayerOneNameLabel.Text = player1.Name;
-            PlayerOneTruthsLabel.Text = "Truths told: " + player1.Score.ToString();
-            PlayerOneDrinksLabel.Text = "Drinks taken: " + player1.TimesDrink.ToString();
-
-            PlayerTwoNameLabel.Text = player2.Name;
-            PlayerTwoTruthsLabel.Text = "Truths told: " + player2.Score.ToString();
-            PlayerTwoDrinksLabel.Text = "Drinks taken: " + player2.TimesDrink.ToString();
+            PlayerTwoNameLabel.Text = Players[1].Name;
+            PlayerTwoTruthsLabel.Text = "Truths told: " + Players[1].Score.ToString();
+            PlayerTwoDrinksLabel.Text = "Drinks taken: " + Players[1].TimesDrink.ToString();
 
             if(playerCount >= 3)
             {
-                var player3 = dal.GetPlayer(2);
-
-                PlayerThreeNameLabel.Text = player3.Name;
-                PlayerThreeTruthsLabel.Text = "Truths told: " + player3.Score.ToString();
-                PlayerThreeDrinksLabel.Text = "Drinks taken: " + player3.TimesDrink.ToString();
+                PlayerThreeNameLabel.Text = Players[2].Name;
+                PlayerThreeTruthsLabel.Text = "Truths told: " + Players[2].Score.ToString();
+                PlayerThreeDrinksLabel.Text = "Drinks taken: " + Players[2].TimesDrink.ToString();
             }
 
             if(playerCount == 4)
             {
-                var player4 = dal.GetPlayer(3);
-
-                PlayerFourNameLabel.Text = player4.Name;
-                PlayerFourTruthsLabel.Text = "Truths told: " + player4.Score.ToString();
-                PlayerFourDrinksLabel.Text = "Drinks taken: " + player4.TimesDrink.ToString();
+                PlayerFourNameLabel.Text = Players[3].Name;
+                PlayerFourTruthsLabel.Text = "Truths told: " + Players[3].Score.ToString();
+                PlayerFourDrinksLabel.Text = "Drinks taken: " + Players[3].TimesDrink.ToString();
             }
         }
 
         private void ExitButton_Clicked(object sender, EventArgs e)
         {
-            dal.EndGame();
+            int playerCount = dal.CountPlayers();
+            dal.SetUserInactive(Players[0].Name);
+            dal.SetUserInactive(Players[1].Name);
+            if (playerCount >= 3)
+            {
+                dal.SetUserInactive(Players[2].Name);
+            }
+            if (playerCount == 4)
+            {
+                dal.SetUserInactive(Players[3].Name);
+            }
             Navigation.PushAsync(new HomePage());
         }
     }

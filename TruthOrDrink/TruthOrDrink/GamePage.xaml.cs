@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using TruthOrDrink.DataAccess;
@@ -16,23 +17,23 @@ namespace TruthOrDrink
     {
         DAL dal = new DAL();
         int players;
-        Player player1;
-        Player player2;
-        Player player3;
-        Player player4;
+        List<Player> Players = new List<Player>();
+
+        
 
         int currentPlayer = 0;
         public GamePage()
         {
             InitializeComponent();
+            
         }
 
         public GamePage(int players)
         {
             this.players = players;
             InitializeComponent();
-
-            CurrentPlayerLabel.Text = "This turn: " + dal.GetPlayer(currentPlayer).Name;
+            Players = dal.GetPlayers();
+            CurrentPlayerLabel.Text = "This turn: " + Players[currentPlayer].Name;
 
             QuestionLabel.Text = dal.RandomQuestion().QuestionBody;
             QuestionLabel.FontSize = 24;
@@ -40,30 +41,46 @@ namespace TruthOrDrink
 
         private void ExitButton_Clicked(object sender, EventArgs e)
         {
-            dal.EndGame();
+            int PlayerCount = dal.CountPlayers();
+            dal.SetUserInactive(Players[0].Name);
+            dal.SetUserInactive(Players[1].Name);
+            if(PlayerCount >= 3)
+            {
+                dal.SetUserInactive(Players[2].Name);
+            }
+            if(PlayerCount == 4)
+            {
+                dal.SetUserInactive(Players[3].Name);
+            }
 
             Navigation.PushAsync(new HomePage());
         }
 
         private void TruthButton_Clicked(object sender, EventArgs e)
         {
-            
             int PlayerCount = dal.CountPlayers();
-            int adjustedCount = PlayerCount - 1;
-           
-            if (currentPlayer < adjustedCount)
+
+            if (currentPlayer < PlayerCount)
             {
                 dal.TruthPicked(currentPlayer);
 
                 currentPlayer++;
-                CurrentPlayerLabel.Text = "This turn: " + dal.GetPlayer(currentPlayer).Name;
+                int checkInt = currentPlayer;
+                if (checkInt == PlayerCount)
+                {
+                    CurrentPlayerLabel.Text = "This turn: " + Players[0].Name;
+                }
+                else
+                {
+                    CurrentPlayerLabel.Text = "This turn: " + Players[currentPlayer].Name;
+                }
             }
 
 
             else
             {
                 currentPlayer = 0;
-                CurrentPlayerLabel.Text = "This turn: " + dal.GetPlayer(0).Name;
+                CurrentPlayerLabel.Text = "This turn: " + Players[currentPlayer].Name;
 
                 dal.TruthPicked(currentPlayer);
                 currentPlayer++;
@@ -81,14 +98,22 @@ namespace TruthOrDrink
                 dal.DrinkPicked(currentPlayer);
 
                 currentPlayer++;
-                CurrentPlayerLabel.Text = "This turn: " + dal.GetPlayer(currentPlayer).Name;
+                int checkInt = currentPlayer;
+                if (checkInt == PlayerCount)
+                {
+                    CurrentPlayerLabel.Text = "This turn: " + Players[0].Name;
+                }
+                else
+                {
+                    CurrentPlayerLabel.Text = "This turn: " + Players[currentPlayer].Name;
+                }
             }
 
 
             else
             {
                 currentPlayer = 0;
-                CurrentPlayerLabel.Text = "This turn: " + dal.GetPlayer(currentPlayer).Name;
+                CurrentPlayerLabel.Text = "This turn: " + Players[currentPlayer].Name;
                 dal.DrinkPicked(currentPlayer);
 
                 currentPlayer++;

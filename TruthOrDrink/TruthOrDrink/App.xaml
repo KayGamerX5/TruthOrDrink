@@ -4,5 +4,20 @@
              x:Class="TruthOrDrink.App">
     <Application.Resources>
 
+        <Color x:Key="Primary">Red</Color>
+        <Color x:Key="Text">Black</Color>
+        <Color x:Key="HeaderText">Gold</Color>
+        <Color x:Key="ErrorText">Red</Color>
+
+        <Style TargetType="NavigationPage">
+            <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}"/>
+            <Setter Property="BarTextColor" Value="{StaticResource Text}"/>
+        </Style>
+
+        <Style TargetType="TabbedPage">
+            <Setter Property="SelectedTabColor" Value="DeepPink"/>
+            <Setter Property="UnselectedTabColor" Value="{StaticResource Primary}"/>
+        </Style>
+        
     </Application.Resources>
 </Application>
