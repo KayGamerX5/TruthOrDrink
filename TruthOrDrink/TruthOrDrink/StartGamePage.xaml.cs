@@ -22,6 +22,7 @@ namespace TruthOrDrink
         public StartGamePage()
         {
             InitializeComponent();
+            dal.EndGame();
         }
 
         private void AddPlayer3Button_Clicked(object sender, EventArgs e)
@@ -61,10 +62,12 @@ namespace TruthOrDrink
                 player1.Name = PlayerOneNameEntry.Text;
                 player1.Score = 0;
                 player1.TimesDrink = 0;
+                player1.IsActive = true;
 
                 player2.Name = PlayerTwoNameEntry.Text;
                 player2.Score = 0;
                 player2.TimesDrink = 0;
+                player2.IsActive = true;
 
                 dal.CreatePlayer(player1);
                 dal.CreatePlayer(player2);
@@ -76,6 +79,7 @@ namespace TruthOrDrink
                     player3.Name = PlayerThreeNameEntry.Text;
                     player3.Score = 0;
                     player3.TimesDrink = 0;
+                    player3.IsActive = true;
 
                     dal.CreatePlayer(player3);
                 }
@@ -87,6 +91,7 @@ namespace TruthOrDrink
                     player4.Name = PlayerFourNameEntry.Text;
                     player4.Score = 0;
                     player4.TimesDrink = 0;
+                    player4.IsActive = true;
 
                     dal.CreatePlayer(player4);
                 }

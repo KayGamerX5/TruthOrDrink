@@ -17,5 +17,7 @@ namespace TruthOrDrink.Model
         public int Score { get; set; }
 
         public int TimesDrink { get; set; }
+
+        public bool IsActive { get; set; }
     }
 }
