@@ -185,5 +185,15 @@ namespace TruthOrDrink.DataAccess
             }
         }
 
+        public int UpdateUser(User user)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(App.DatabaseLocation))
+            {
+                connection.CreateTable<User>();
+                int updatedRows = connection.Update(user);
+                return updatedRows;
+            }
+        }
+
     }
 }
