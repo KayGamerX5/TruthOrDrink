@@ -1,11 +1,13 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TruthOrDrink.DataAccess;
 using TruthOrDrink.Model;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -14,6 +16,7 @@ namespace TruthOrDrink
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SettingsPage : ContentPage
     {
+        DAL dal = new DAL();
         DateTime birthday = new DateTime();
         public SettingsPage()
         {
@@ -26,7 +29,7 @@ namespace TruthOrDrink
 
             ConnectedUser = connectedUser;
 
-            DAL dal = new DAL();
+            
             var user = dal.GetUser(ConnectedUser);
            
 
@@ -57,13 +60,7 @@ namespace TruthOrDrink
 
         private void EditUserSaveButton_Clicked(object sender, EventArgs e)
         {
-            User user = new User();
-
-            using (SQLiteConnection connection = new SQLiteConnection(App.DatabaseLocation))
-            {
-                connection.CreateTable<User>();
-                user = connection.Table<User>().Where(x => x.UserName == ConnectedUser).FirstOrDefault();
-            }
+            var user = dal.GetUser(ConnectedUser);
 
             bool CheckboxIsChecked = EditUserConfirmCheckbox.IsChecked;
             if (CheckboxIsChecked == true)
@@ -73,24 +70,9 @@ namespace TruthOrDrink
                 user.Name = EditRealNameEntry.Text;
                 user.Email = EditEmailEntry.Text;
                 user.Birthday = birthday;
-                
 
-                int updatedRows;
 
-                using (SQLiteConnection connection = new SQLiteConnection(App.DatabaseLocation))
-                {
-                    connection.CreateTable<User>();
-                    updatedRows = connection.Update(user);
-                    if (updatedRows > 0)
-                    {
-                        DisplayAlert("Succes!", "Succesfully edited account details", "Exit");
-                        Navigation.PushAsync(new MainPage());
-                    }
-                    else
-                    {
-                        DisplayAlert("Oops!", "Something went wrong, try again!", "Exit");
-                    }
-                }
+                dal.UpdateUser(user);
             }
 
 
@@ -104,6 +86,31 @@ namespace TruthOrDrink
         private void LogoutButton_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new MainPage());
+        }
+       
+
+        private async void ImagePickerButton_Clicked(object sender, EventArgs e)
+        {
+            var result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions
+            {
+                Title = "Take a photo"
+            });
+
+            var stream = await result.OpenReadAsync();
+
+            ResultImage.Source = ImageSource.FromStream(() => stream);
+        }
+
+        private async void ImageTakerButton_Clicked(object sender, EventArgs e)
+        {
+            var result = await MediaPicker.CapturePhotoAsync(new MediaPickerOptions
+            {
+                Title = "Take a photo"
+            });
+
+            var stream = await result.OpenReadAsync();
+
+            ResultImage.Source = ImageSource.FromStream(() => stream);
         }
     }
 }

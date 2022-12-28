@@ -11,6 +11,7 @@
                 <Label x:Name="EmailLabel" Text="Email placeholder"/>
                 <Label x:Name="BirthdayLabel" Text="Birthday Placeholder"/>
 
+
                 <Button x:Name="EditUserButton" Text="Change user information" Clicked="EditUserButton_Clicked" IsVisible="True"/>
 
                 <Entry x:Name="EditUserNameEntry" Placeholder="Enter your Username here" IsVisible="False"/>
@@ -26,8 +27,10 @@
                 <Button x:Name="EditUserSaveButton" Text="Save changes" Clicked="EditUserSaveButton_Clicked" IsVisible="False"/>
                 <Button x:Name="LogoutButton" Text="Log out" Clicked="LogoutButton_Clicked"/>
 
+                <Button x:Name="ImagePickerButton" Text="Choose a profile image from gallery" Clicked="ImagePickerButton_Clicked"/>
+                <Button x:Name="ImageTakerButton" Text="Take a new profile image with camera" Clicked="ImageTakerButton_Clicked"/>
 
-
+                <Image x:Name="ResultImage" HeightRequest="100" WidthRequest="100" Aspect="AspectFit"/>
 
             </StackLayout>
         </ScrollView>

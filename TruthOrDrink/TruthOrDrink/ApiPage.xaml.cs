@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TruthOrDrink.Logic;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -21,6 +22,11 @@ namespace TruthOrDrink
         {
             var cocktails = await CocktailLogic.GetRandomCocktail();
             CocktailListView.ItemsSource = cocktails;
+        }
+
+        private void BrowserButton_Clicked(object sender, EventArgs e)
+        {
+            Browser.OpenAsync("https://foodfornet.com/alcoholic-drinks-drinking-games/", BrowserLaunchMode.SystemPreferred);
         }
     }
 }

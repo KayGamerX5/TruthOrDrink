@@ -65,25 +65,17 @@ namespace TruthOrDrink
                 dal.TruthPicked(currentPlayer);
 
                 currentPlayer++;
-                int checkInt = currentPlayer;
-                if (checkInt == PlayerCount)
-                {
-                    CurrentPlayerLabel.Text = "This turn: " + Players[0].Name;
-                }
-                else
-                {
-                    CurrentPlayerLabel.Text = "This turn: " + Players[currentPlayer].Name;
-                }
+                CurrentPlayerLabel.Text = "This turn: " + Players[currentPlayer].Name;
             }
 
 
             else
             {
                 currentPlayer = 0;
-                CurrentPlayerLabel.Text = "This turn: " + Players[currentPlayer].Name;
 
                 dal.TruthPicked(currentPlayer);
                 currentPlayer++;
+                CurrentPlayerLabel.Text = "This turn: " + Players[currentPlayer].Name;
             }
 
             QuestionLabel.Text = dal.RandomQuestion().QuestionBody;
